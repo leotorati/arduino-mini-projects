@@ -2,7 +2,7 @@
 #include <Stepper.h>
 
 const int stepsPerRevolution = 500; 
-const long maxStepsDistance = 50000;
+const long maxStepsDistance = 55000; // +- 2,4m
 const long minStepsDstance = 0;
 
 int initialDistance = 0;
@@ -14,14 +14,14 @@ int triggerDistanceTimeout = 1000;
 int currentTriggerDistance = 0;
 
 Stepper myStepper(stepsPerRevolution, 8,10,9,11); 
-Ultrasonic ultrasonic(4, 5, 40000UL);
+Ultrasonic ultrasonic(4, 5);
 
 void setup() { 
   Serial.begin(9600);
   myStepper.setSpeed(60);
   
   initialDistance = readInitialTriggerDistance();
-  triggerDistance = initialDistance / 2;
+  triggerDistance = initialDistance - (initialDistance / 4);
 } 
   
 void loop() {
@@ -80,6 +80,13 @@ int readCurrentTriggerDistance() {
 
   currentTriggerDistance = samplesTotal / samplesCount;
 
+  Serial.print("Distance current/initial/trigger: ");
+  Serial.print(currentTriggerDistance);
+  Serial.print("/");
+  Serial.print(initialDistance);
+  Serial.print("/");
+  Serial.println(triggerDistance);
+
   return currentTriggerDistance;
 }
 
@@ -88,6 +95,7 @@ int readInitialTriggerDistance() {
   int samplesTotal = 0;
   for (int i = 0; i < 5; i++) {
     samplesTotal = samplesTotal + ultrasonic.distanceRead();
+    delay(200);
   }
 
   return samplesTotal / 5;
