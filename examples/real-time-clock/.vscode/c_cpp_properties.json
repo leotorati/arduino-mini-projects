@@ -1,0 +1,23 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "/home/leo/.arduino15/packages/arduino/tools/**",
+                "/home/leo/.arduino15/packages/arduino/hardware/avr/1.6.21/**",
+                "${workspaceFolder}/**",
+                "/extra/home-files/programs/arduino-1.8.5/libraries/**",
+                "/home/leo/Arduino/libraries/**"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "clang-x64",
+            "forcedInclude": [
+                "/home/leo/.arduino15/packages/arduino/hardware/avr/1.6.21/cores/arduino/Arduino.h"
+            ]
+        }
+    ],
+    "version": 4
+}
